@@ -43,8 +43,15 @@ flights_to_SEA <- select(flights_two, origin,dest, timegained) %>%
 
 # On average, did flights to SeaTac gain or loose time?
 mean(flights_to_SEA$timegained, na.rm = TRUE)
-
+# GAINED 11 minutes
 # Consider flights from JFK to SEA. What was the average, min, and max air time
 # of those flights? Bonus: use pipes to answer this question in one statement
 # (without showing any other data)!
-filter(flights_to_SEA, origin == "JFK")
+
+summary <- flights_two %>% filter(origin == 'JFK', dest == "SEA") %>% 
+  summarise (
+   avg_time = mean(timegained, na.rm = T),
+   min_time = min(timegained, na.rm = T),
+   max_time = max(timegained, na.rm = T)
+    
+  )
